@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:insert="~{header :: head}">
+    <meta charset="utf-8">
+    <title>ListaCliente</title>
+</head>
+<body>
+    <nav th:insert="~{navbar :: nav}"></nav>
+    <br>  
+    
+    <div class="container tableFixHead">
+        <div class="pull-right form-row">					
+			<form action="relatorioClientes/consultarNome" method="post">
+				<br>
+				<div class="form-inline">					
+					<label>Consulta por Nome...</label>
+					<input type="text" class="form-control" id="consultaNome" name="consultaNome"/>
+					<button type="submit" class="btn btn-success" style="background-color: #343a40; border-color: #343a40">Consultar</button>
+				</div>		
+			</form>
+			
+			<form action="relatorioClientes/consultarCidade" method="post">
+				<br>
+				<div class="form-inline">					
+					<label>Consulta por Cidade...</label>
+					<input type="text" class="form-control" id="consultaCidade" name="consultaCidade"/>
+					<button type="submit" class="btn btn-success" style="background-color: #343a40; border-color: #343a40">Consultar</button>
+				</div>		
+			</form>
+			<br>
+		</div>
+		<br>
+		<H2>Relatório de clientes</H2>
+        <table class="table table-light table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th style="width: 15%">Telefone</th>
+                    <th style="width: 15%">Celular</th>
+                    <th>E-mail</th>
+                    <th>Cidade</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${pessoas}">
+                    <td th:text="${p.nome}">Nome</td>
+                    <td th:text="${p.telefone}">Telefone</td>
+                    <td th:text="${p.celular}">Celular</td>
+                    <td th:text="${p.email}">E-mail</td>
+                    <td th:text="${p.municipio}">Cidade</td>
+                <tr>
+            </tbody>
+        </table>
+        
+    	<form> 
+    		<a href="/relatorioClientes/relatorio" target="-blank" class="btn btn-success" style="background-color: #343a40; border-color: #343a40">Preparar Impressão</a>
+    		<a href="/relatorioClientes" class="btn btn-success" style="background-color: #343a40; border-color: #343a40" onClick="document.location.reload(true)">Recarregar</a>  
+    		<a href="/" class="btn btn-success" style="background-color: #343a40; border-color: #343a40">Inicio</a>
+			<!-- <button type="button" class="btn btn-success" style="background-color: #343a40; border-color: #343a40" onclick="javascript:window.close()">Fechar Relatório</button> -->			
+		</form>
+    </div>

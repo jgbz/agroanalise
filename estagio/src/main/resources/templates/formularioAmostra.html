@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="pt-br">
+<head th:insert="~{header :: head}">
+ 	<meta charset="UTF-8">
+ 	<title>Formulário Cliente</title>
+</head>
+
+<body class="indexBody">
+
+ 	<nav th:insert="~{navbar :: nav}"></nav> 
+	    <div class="container" id="cliente"><br><br>
+			<div class="card container" style="height: 60%">
+				<form action="salvar" method="post" id="clienteForm">
+				
+					<div class="alert alert-danger" th:if="${not #strings.isEmpty(erros)}" >
+						<div th:each="erro : ${erros}">
+							<span th:text="${erro.getDefaultMessage()}"></span>
+						</div>				
+					</div>
+				
+					<div class="form-row">	
+						<div class="form-group col-md-3">
+						<label>Terreno</label>
+						<select th:field="${amostra.Terreno}" class="form-control">
+				            	<option value="0">Escolha o terreno</option>
+    							<option th:each="terreno : ${terrenos}" th:value="${terreno.id}" th:text="${terreno.local}"></option>
+    					</select>
+    					</div>
+						
+						<div class="form-group col-md-8">
+				            <label>Data da Coleta</label>
+				            <input type="date" class="form-control" id="dataColeta" name="dataColeta" th:field="${amostra.dataColeta}">
+						</div> 
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-3">
+				            	<label>Data de Recebimento</label>
+				            	<input type="date" class="form-control" id="dataRecebimento" name="dataRecebimento" th:field="${amostra.dataRecebimento}">
+						</div> 
+						<div class="form-group col-md-3">
+				            	<label>Peso da Amostra</label>
+				            	<input type="number" step="0.01" class="form-control" id="pesoAmostra" name="pesoAmostra" th:field="${amostra.pesoAmostra}">
+						</div>
+						<div class="form-group col-md-3">
+				            	<label>Peso da Raiz</label>
+				            	<input type="number" step="0.01" class="form-control" id="pesoRaiz" name="pesoRaiz" th:field="${amostra.pesoRaiz}">
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+				            	<label>Cultura</label>
+				            	<input type="text" class="form-control" id="cultura" name="cultura" th:field="${amostra.cultura}">
+						</div>
+						<div class="form-group col-md-3">
+				            	<label>Cultura Hibrida</label>
+				            	<input type="text" class="form-control" id="hibrido" name="hibrido" th:field="${amostra.hibrido}">
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-2">
+				            	<label>Variedade</label>
+				            	<input type="text" class="form-control" id="variedade" name="variedade" th:field="${amostra.variedade}">
+						</div>
+						<div class="form-group col-md-2">
+				            	<label>Observação</label>
+				            	<input type="text" class="form-control" id="observacao" name="observacao" th:field="${amostra.observacao}">
+						</div>
+						<div class="form-group col-md-2">
+				            	<label>Custo</label>
+				            	<input type="number" class="form-control" id="custo" name="custo" th:field="${amostra.custo}">
+						</div>
+						<div class="form-group col-md-3">
+							<label>Status</label>
+							<select th:field="${amostra.status}" class="form-control">
+								<option th:value="AGUARDANDO" th:text="AGUARDANDO">AGUARDANDO</option>
+								<option th:value="ANALISADO" th:text="ANALISADO">ANALISADO</option>				            	
+				            	<option th:value="FINALIZADO" th:text="FINALIZADO">FINALIZADO</option>
+				          	</select>
+						</div>
+					</div>
+			         <input type="hidden" id="id" name="id" th:value="${amostra.id}" th:if="${amostra != null}"/>
+			
+			        <button type="submit" class="btn btn-primary">Salvar</button>
+			        <a href="http://localhost:8080/amostras" class="btn btn-danger">Cancelar</a>
+				</form>
+	    	</div>
+	    </div>
+<div th:insert="~{footer :: footer}"></div>
+</body>
+   
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="pt-br">
+<head th:insert="~{header :: head}">
+ 	<meta charset="UTF-8">
+ 	<title>Formulário Terreno</title>
+</head>
+
+<body class="indexBody">
+
+ 	<nav th:insert="~{navbar :: nav}"></nav> 
+	    <div class="container" id="cliente"><br><br>
+			<div class="card container" style="height: 60%">
+				<form action="salvar" method="post" id="clienteForm">
+				
+					<div class="alert alert-danger" th:if="${not #strings.isEmpty(erros)}" >
+						<div th:each="erro : ${erros}">
+							<span th:text="${erro.getDefaultMessage()}"></span>
+						</div>				
+					</div>
+				
+					<div class="form-row">	
+						<div class="form-group col-md-3">
+					
+						<label>Proprietario</label>
+						<select th:field="${terreno.proprietario}" class="form-control">
+				            	<option value="0">Escolha o proprietario</option>
+    							<option th:each="pessoa : ${pessoas}" th:value="${pessoa.id}" th:text="${pessoa.nome}"></option>
+    					</select>
+    					</div>
+						
+						<div class="form-group col-md-8">
+				            <label>Local</label>
+				            <input type="text" class="form-control" id="local" name="local" th:field="${terreno.local}">
+						</div> 
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-3">
+				            	<label>Talhão</label>
+				            	<input type="text" class="form-control" id="talhao" name="talhao" th:field="${terreno.talhao}">
+						</div> 
+						<div class="form-group col-md-3">
+				            	<label>Lote</label>
+				            	<input type="text" class="form-control" id="lote" name="lote" th:field="${terreno.lote}">
+						</div> 
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+				            	<label>Matricula</label>
+				            	<input type="text" class="form-control" id="matricula" name="matricula" th:field="${terreno.matricula}">
+						</div> 
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-2">
+				            	<label>Área</label>
+				            	<input type="text" class="form-control" id="area" name="area" th:field="${terreno.area}">
+						</div>
+						<div class="form-group col-md-6">
+				            	<label>Gleba</label>
+				            	<input type="text" class="form-control" id="gleba" name="gleba" th:field="${terreno.gleba}">
+						</div>
+						<div class="form-group col-md-2">
+				            	<label>Município</label>
+				            	<input type="text" class="form-control" id="municipio" name="municipio" th:field="${terreno.municipio}">
+						</div>
+					</div>
+					
+			         <input type="hidden" id="id" name="id" th:value="${terreno.id}" th:if="${terreno != null}"/>
+			
+			        <button type="submit" class="btn btn-primary">Salvar</button>
+			        <a href="../terrenos" class="btn btn-danger">Cancelar</a>
+				</form>
+	    	</div>
+	    </div>   
+<div th:insert="~{footer :: footer}"></div>
+</html>

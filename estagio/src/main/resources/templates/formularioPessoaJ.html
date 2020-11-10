@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="pt-br">
+<head th:insert="~{header :: head}">
+ 	<meta charset="UTF-8">
+ 	<title>Formulário Cliente</title>
+ 	
+</head>
+
+
+<body>
+	
+ 	<nav th:insert="~{navbar :: nav}"></nav> 
+
+	    <div class="container" id="cliente"><br><br>
+			<div class="card container" style="height: 60%">
+				<form action="salvar" method="post" id="clienteForm">
+					
+					<div class="alert alert-danger"
+					th:if="${not #strings.isEmpty(erros)}" style="margin-top: 10px">
+						<div th:each="erro : ${erros}">
+							<span th:text="${erro.getDefaultMessage()}"></span>
+						</div>				
+					</div>
+					<div class="form-row">	
+						<div class="form-group col-md-3">
+						<label>Convenio</label>
+						<select th:field="${pessoaFisicaDto.convenio}" class="form-control">
+				            	<option value="0">Escolha o convenio</option>
+    							<option th:each="convenio : ${convenios}" th:value="${convenio.id}" th:text="${convenio.nome}"></option>
+    					</select>
+    					</div>
+						
+						<div class="form-group col-md-8">
+				            <label>Nome</label>
+				            <input type="text" class="form-control" id="nome" name="nome" th:field="${pessoaFisicaDto.nome}">
+						</div> 
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label>Tipo Pessoa</label>
+							<select th:field="${pessoaFisicaDto.tipoPessoa}" class="form-control" id="dropdown">
+								<option value="0" disabled>Escolha o tipo da pessoa</option>
+								<option th:value="FISICA" th:text="Fisica">Física</option>
+				            	<option th:value="JURIDICA" th:text="Juridica">Jurídica</option>
+				          	</select>
+						</div>
+						<div class="form-group col-md-2">
+							<label>Sexo</label>
+							<select th:field="${pessoaFisicaDto.sexo}" class="form-control">
+								<option th:value="Feminino" th:text="Feminino">Feminino</option>
+				            	<option th:value="Masculino" th:text="Masculino">Masculino</option>
+				          	</select>
+						</div>
+						<div class="form-group col-md-3">
+				            	<label>Telefone</label>
+				            	<input type="text" class="form-control" id="telefone" name="telefone" th:field="${pessoaFisicaDto.telefone}">
+						</div> 
+						<div class="form-group col-md-3">
+				            	<label>Celular</label>
+				            	<input type="text" class="form-control" id="celular" name="celular" th:field="${pessoaFisicaDto.celular}">
+						</div> 
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+				            	<label>Email</label>
+				            	<input type="email" class="form-control" id="email" name="email" th:field="${pessoaFisicaDto.email}">
+						</div> 
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-2">
+				            	<label>Cep</label>
+				            	<input type="text" class="form-control" id="cep" name="cep" th:field="${pessoaFisicaDto.cep}" onblur="pesquisacep(this.value);">
+						</div>
+						<div class="form-group col-md-6">
+				            	<label>Endereco</label>
+				            	<input type="text" class="form-control" id="endereco" name="endereco" th:field="${pessoaFisicaDto.endereco}">
+						</div>
+						<div class="form-group col-md-2">
+				            	<label>Numero</label>
+				            	<input type="text" class="form-control" id="numero" name="numero" th:field="${pessoaFisicaDto.numero}">
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-4">
+				            <label>Municipio</label>
+				            <input type="text" class="form-control" id="municipio" name="municipio" th:field="${pessoaFisicaDto.municipio}">
+						</div>
+						<div class="form-group col-md-4">
+				            <label>Complemento</label>
+				            <input type="text" class="form-control" id="complemento" name="complemento" th:field="${pessoaFisicaDto.complemento}">
+						</div>
+						
+						<div class="form-group col-md-2">
+				            	<label>UF</label>
+				            	<select th:field="${pessoaFisicaDto.uf}" class="form-control">
+				            		<option value="" disabled >Selecione o estado</option>
+									<option th:value="RS" th:text="RS">RS</option>
+									<option th:value="SC" th:text="SC">SC</option>
+									<option th:value="PR" th:text="PR">PR</option>
+									<option th:value="SP" th:text="SP">SP</option>
+				          		</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label>CPF</label>
+				            <input type="text" class="form-control" id="cpf" name="cpf" th:field="${pessoaFisicaDto.cpf}">
+						</div> 
+				          
+						<div class="form-group col-md-3">
+				            <label>RG</label>
+				            <input type="text" class="form-control" id="rg" name="rg" th:value="${pessoaFisicaDto.rg}">
+						</div>
+			 		</div>
+			 		<div class="form-row">
+						<div class="form-group col-md-6">
+				            <label>Razão Social</label>
+				            <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" th:value="${pessoaFisicaDto.razaoSocial}">
+						</div>
+						<div class="form-group col-md-3">
+				            <label>Cnpj</label>
+				            <input type="text" class="form-control" id="cnpj" name="cnpj" th:value="${pessoaFisicaDto.cnpj}">
+						</div>
+						<div class="form-group col-md-3">
+				            <label>Inscrição Estadual</label>
+				            <input type="text" class="form-control" id="inscricaoEstadual" name="inscricaoEstadual" th:value="${pessoaFisicaDto.inscricaoEstadual}">
+						</div>
+					</div>
+			         <input type="hidden" id="id" name="id" th:value="${pessoaFisicaDto.id}" th:if="${pessoaFisicaDto != null}"/>
+			
+			        <button type="submit" class="btn btn-primary">Salvar</button>
+			        <a href="http://localhost:8080/clientes" class="btn btn-danger">Cancelar</a>
+			        
+				</form>
+				
+	    	</div>
+	    	
+	    </div>
+		
+	<div th:insert="~{footer :: footer}"></div>
+	
+	<script>
+    
+    function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('endereco').value=("");
+            document.getElementById('municipio').value=("");
+            document.getElementById('uf').value=("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('endereco').value=(conteudo.logradouro);
+            document.getElementById('municipio').value=(conteudo.localidade);
+            document.getElementById('uf').value=(conteudo.uf);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('endereco').value="...";
+                document.getElementById('municipio').value="...";
+                document.getElementById('uf').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };
+
+    </script>
+    <script>
+    
+    	  	 
+     	$(document).on('change', '#dropdown', function() {
+      	if( $(this).val() == 'FISICA') {
+           		$('#cpf').prop( "disabled", false );
+           		$('#rg').prop( "disabled", false );
+           		$('#cnpj').prop( "disabled", true );
+           		$('#inscricaoEstadual').prop( "disabled", true );
+           		$('#razaoSocial').prop( "disabled", true );
+        } else {       
+        	$('#cpf').prop( "disabled", true );
+       		$('#rg').prop( "disabled", true );
+       		$('#cnpj').prop( "disabled", false );
+       		$('#inscricaoEstadual').prop( "disabled", false );
+       		$('#razaoSocial').prop( "disabled", false );
+        }
+      });
+     
+    </script>
+    
+	</body>
+</html>

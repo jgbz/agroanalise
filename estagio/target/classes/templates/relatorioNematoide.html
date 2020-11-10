@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:insert="~{header :: head}">
+    <meta charset="utf-8">
+    <title>ListaCliente</title>
+</head>
+<body>
+    <nav th:insert="~{navbar :: nav}"></nav>
+    <br>
+    <div class="container tableFixHead">
+    	<div class="form-row">
+	    	<form action="relatorioNematoides/consultarEspecie" method="post">
+					<br>
+					<div class="form-inline ">					
+						<label>Consulta por Espécie...</label>
+						<input type="text" class="form-control" id="consultaEspecie" name="consultaEspecie"/>
+						<button type="submit" class="btn btn-success" style="background-color: #343a40; border-color: #343a40">Consultar</button>
+					</div>		
+				</form>
+				
+				<form action="relatorioNematoides/consultarGenero" method="post">
+					<br>
+					<div class="form-inline">					
+						<label>Consulta por Gênero...</label>
+						<input type="text" class="form-control" id="consultaGenero" name="consultaGenero"/>
+						<button type="submit" class="btn btn-success" style="background-color: #343a40; border-color: #343a40">Consultar</button>
+					</div>		
+			</form>
+		</div>
+		<br>  
+		<H2>Relatório de Nematoides</H2>
+        <table class="table table-light table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Espécie</th>
+                    <th style="width: 50%">Gênero</th>                  
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="n : ${nematoides}">
+                    <td th:text="${n.especie}">Espécie</td>
+                    <td th:text="${n.genero}">Gênero</td>
+                <tr>
+            </tbody>
+        </table>
+        
+    	<form> 
+    		<a href="/relatorioNematoides/relatorio" target="-blank" class="btn btn-success" style="background-color: #343a40; border-color: #343a40">Preparar Impressão</a>
+    		<a href="/relatorioNematoides" class="btn btn-success" style="background-color: #343a40; border-color: #343a40" onClick="document.location.reload(true)">Recarregar</a>  
+    		<a href="/" class="btn btn-success" style="background-color: #343a40; border-color: #343a40">Inicio</a>
+			<!-- <button type="button" class="btn btn-success" style="background-color: #343a40; border-color: #343a40" onclick="javascript:window.close()">Fechar Relatório</button> -->			
+		</form>
+    </div>

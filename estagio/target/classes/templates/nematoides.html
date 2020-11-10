@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head th:insert="~{header :: head}">
+<meta charset="utf-8">
+<title>AgroAnálise</title>
+</head>
+
+<body>
+	<nav th:insert="~{navbar :: nav}"></nav>
+	<div class="alert alert-danger" th:if="${not #strings.isEmpty(erros)}">
+		<div>
+			<span th:text="${erros}"></span>
+		</div>
+	</div>
+	<div class="container">
+		<a href="nematoides/formulario" class="btn btn-success" id="newButton">Novo
+			Nematoide</a>
+	</div>
+	<div id="table-wrapper">
+		<div class="container tableFixHead">
+			<table class="table table-light table-hover ">
+				<thead class="thead-dark">
+					<tr>
+						<th style="width: 5%">ID</th>
+						<th style="width: 15%">Genero</th>
+						<th>Especie</th>
+						<th style="width: 15%">...</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="n : ${nematoides}">
+						<td th:text="${n.id}">Código</td>
+						<td th:text="${n.genero}">Nome</td>
+						<td th:text="${n.especie}">Telefone</td>
+						<td><a th:href="@{nematoides/editar/(id=${n.id})}"
+							class="btn btn-secondary" title="Editar"> <i class="far fa-edit"></i>
+						</a> 
+						</td>
+					<tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div th:insert="~{footer :: footer}"></div>
+</body>
+</html>

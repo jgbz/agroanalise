@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:insert="~{header :: head}">
+    <meta charset="utf-8">
+    <title>ListaCliente</title>
+</head>
+<body>
+    <nav th:fragment="nav" class="navbar container-fluid navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="../img/Facec 2.png" width="90" height="30" class="d-inline-block align-top" alt="">    
+        </a>
+    </nav>
+    <br>
+    <div class="container tableFixHead">
+		<br>  
+		<H2>Relatório de Nematoides</H2>
+		<br>
+        <table class="table table-light table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Espécie</th>
+                    <th style="width: 50%">Gênero</th>                  
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="n : ${nematoides}">
+                    <td th:text="${n.especie}">Espécie</td>
+                    <td th:text="${n.genero}">Gênero</td>
+                <tr>
+            </tbody>
+        </table>
+        
+    	<form>    	
+    		<a href="#" class="btn btn-success" style="background-color: #343a40; border-color: #343a40" onclick="javascript:window.print()" >Imprimir</a>    		
+			<button type="button" class="btn btn-success" style="background-color: #343a40; border-color: #343a40" onclick="javascript:window.close()">Fechar Relatório</button>			
+		</form>
+    </div>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+	<head th:insert="~{header :: head}">
+		<meta charset="utf-8">
+		<title>AgroAnálise</title>
+	</head>
+	
+	<body>
+		<nav th:insert="~{navbar :: nav}"></nav>
+		<div class="alert alert-danger"
+					th:if="${not #strings.isEmpty(erros)}" >
+					<div>
+						<span th:text="${erros}"></span>
+					</div>				
+				</div>
+		<div class="container">
+			<br><br>
+		</div>
+		<div id="table-wrapper">
+		<div class="container tableFixHead">
+			<div class="alert alert-danger" th:text="${message}" th:if="${message != null}"></div>
+			<table class="table table-light table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th style="width: 5%" >Código</th>
+						<th style="width: 5%" >Amostra</th>
+						<th>Cliente</th>
+						<th style="width: 20%">Pagamento</th>
+						<th style="width: 20%">...</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="l : ${laudos}">
+						<td th:text="${l.id}">Id</td>
+						<td th:text="${l.amostra.getId()}">Id Amostra</td>
+						<td th:text="${l.amostra.getTerreno().getProprietario().getNome()}">Cliente</td>
+						<td th:text="${l.tipoPagamento}">Pagamento</td>
+						<td>
+							<a th:href="@{laudos/editar/(id=${l.id})}" class="btn btn-warning" title="Editar">
+								<i class="far fa-edit"></i>
+							</a>
+							<a th:data-url="@{laudos/excluir/(id=${l.id})}"  th:onclick="if (window.confirm('Tem certeza que quer excluir o laudo? A operação não pode ser desfeita.')) { 
+				window.location.href = this.getAttribute('data-url')
+				}" class="btn btn-danger" title="Excluir">
+								<i class="far fa-trash-alt"></i>
+							</a>
+							<a target="_blank" th:href="@{laudos/view/(id=${l.id})}" class="btn btn-info" title="Imprimir">
+								<i class="fas fa-file-download"></i>
+							</a>
+							<a th:data-url="@{laudos/pagar/(id=${l.id})}"  th:onclick="if (window.confirm('Tem certeza que quer confimar o pagamento do laudo? A operação não pode ser desfeita.')) { 
+				window.location.href = this.getAttribute('data-url')
+				}" class="btn btn-success" style="margin-left: 10px" title="Confirmar Pagamento">
+								<i class="fas fa-money-bill-wave-alt"></i>
+							</a>
+									
+						</td>
+					<tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		<div th:insert="~{footer :: footer}">
+		</div>
+	</body>
+</html>

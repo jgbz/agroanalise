@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="pt-br">
+<head th:insert="~{header :: head}">
+ 	<meta charset="UTF-8">
+ 	<title>Formulário Terreno</title>
+</head>
+
+<body class="indexBody">
+
+ 	<nav th:insert="~{navbar :: nav}"></nav> <br>
+ 	<div class="card container"><br>
+ 		<div class="card">	
+ 		<div class="npa tableFixHead" style="height: 300px">
+						
+				<table class="table table-striped table-light table-bordered table-hover">
+					<thead class="thead-dark">
+					    <tr>
+							<th>nematoide</th>
+							<th>Solo</th>
+							<th>Raiz</th>	
+							<th>...</th>					      
+					    </tr>
+					</thead>
+					<tbody>
+						<tr th:each="n : ${npa}">
+							<td th:text="${n.nematoide.getEspecie()}">Código</td>
+		                    <td th:text="${n.qtdeSolo}">Nome</td>
+		                    <td th:text="${n.qtdeRaiz}">Telefone</td>
+		                    <td>
+		                    	<input type="hidden" id="id" name="id" th:value="${npm.id}" th:if="${npm != null}"/>
+		                    	<a th:href="@{delete/(id=${n.id})}" class="btn btn-secondary" title="Excluir"><i class="far fa-edit"></i></a>		                        
+		                    </td>
+					</tbody>
+				</table><br>
+			
+				
+	    	</div>
+	    </div><br>
+    
+    	<div class="card ">
+    		<div class="container">
+    			<form action="salvarnp" method="post" id="clienteForm">
+				<div class="form-row">
+					<input type="hidden" id="id" name="id" th:value="${npm.id}" th:if="${npm != null}"/>
+					
+					<input type="hidden" id="idAmostra" name="idAmostra" th:value="${amostra.id}" th:if="${amostra != null}"/>			
+					<div class="form-group col-md-3">
+				
+					<label>Nematoides</label>
+					<select th:field="${npm.nematoide}" class="form-control">
+			            	<option value="0" disabled>Escolha o nematoide</option>
+   							<option th:each="nematoide : ${nematoides}" th:value="${nematoide.id}" th:text="${nematoide.especie}"></option>
+   					</select>
+   					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-2">
+			            	<label>Qtde solo</label>
+			            	<input type="text" class="form-control" id="qtdeSolo" name="qtdeSolo" th:field="${npm.qtdeSolo}">
+					</div>
+					<div class="form-group col-md-6">
+			            	<label>Qtde raiz</label>
+			            	<input type="text" class="form-control" id="qtdeRaiz" name="qtdeRaiz" th:field="${npm.qtdeRaiz}">
+					</div>
+				</div>
+		
+			        <button type="submit" class="btn btn-primary">Salvar</button>
+			        <a href="../../amostras" class="btn btn-danger">Cancelar</a>
+			</form>
+    		</div>
+    </div><br>
+   </div>
+
+</html>

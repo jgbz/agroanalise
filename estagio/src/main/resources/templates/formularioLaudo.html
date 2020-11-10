@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="pt-br">
+<head th:insert="~{header :: head}">
+ 	<meta charset="UTF-8">
+ 	<title>Formulário Terreno</title>
+</head>
+
+<body class="indexBody">
+
+ 	<nav th:insert="~{navbar :: nav}"></nav> 
+	    <div class="container" id="cliente"><br><br>
+			<div class="card container" style="height: 60%">
+				<form action="salvar" method="post" id="clienteForm">
+				
+					<div class="form-row">	
+						<div class="form-group col-md-4">
+							<label>Forma de pagamento</label>
+							<select th:field="${laudo.tipoPagamento}" class="form-control">
+								<option th:value="BOLETO" th:text="Boleto">Física</option>
+				            	<option th:value="DINHEIRO" th:text="Dinheiro">Jurídica</option>
+				            	<option th:value="CARTAO" th:text="Cartão">Cartão</option>
+				            	<option th:value="CHEQUE" th:text="Cheque">Cheque</option>
+					        </select>
+    					</div>
+						<div class="form-group col-md-4">
+				            <label>Parcelas</label>
+				            <input type="text" class="form-control" id="parcelas" name="parcelas" th:field="${laudo.parcelas}">
+						</div> 						
+					</div>
+					
+					<input type="hidden" id="id" name="id" th:value="${laudo.id}" th:if="${laudo != null}"/>
+					<input type="hidden" id="amostra" name="amostra" th:value="${amostra.id}" th:if="${amostra != null}"/>
+						
+			        <button type="submit" class="btn btn-primary">Salvar</button>
+			        <a href="/laudos" class="btn btn-danger">Cancelar</a>
+				</form>
+	    	</div>
+	    </div>
+
+ 	<div th:insert="~{footer :: footer}"></div>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="pt-br">
+<head th:insert="~{header :: head}">
+  <meta charset="UTF-8">
+  <title>Formulário Cliente</title>
+</head>
+
+<body class="indexBody">
+
+  <nav th:insert="~{navbar :: nav}"></nav> 
+  <div class="container tableFixHead">
+
+    <div class="container" id="cliente">
+		<div class="card container" style="height: 60%">
+		<form action="salvar" method="post" class="form-row">
+
+      	<div class="form-row">
+			<div class="form-group col-md-6">
+            	<label>Nome completo</label>
+            	<input type="text" class="form-control" id="nome" name="nome" th:value="${pessoa.nome}">
+			</div>
+          
+			<div class="form-group col-md-4">
+				<label>Tipo Pessoa</label>
+				<select th:field="${pessoa.tipoPessoa}" class="form-control">
+					<option th:value="'0'" th:text="Fisica">Física</option>
+	            	<option th:value="'1'" th:text="Juridica">Jurídica</option>
+	          	</select>
+			</div>
+
+			
+          
+          <div class="form-group col-md-3">
+            <label>CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" th:field="${pessoa.cpf}">
+          </div> 
+        
+		
+          <div class="form-group col-md-3">
+            <label>RG</label>
+            <input type="text" class="form-control" id="rg" name="descricao" th:value="${pessoa.rg}">
+          </div>
+ 
+        </div>
+		
+        <div class="form-row">
+        
+          
+          <div class="form-group col-md-6">
+            <label>Razáo Social</label>
+            <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" th:value="${pessoa.razaoSocial}">
+          </div> 
+		
+		<!-- 
+          <div class="form-group col-md-3">
+            <label>Inscrição estadual</label>
+            <input type="text" class="form-control" id="inscricaoEstadual" name="inscricaoEstadual" th:value="${pessoa.inscricaoEstadual}">
+          </div>  -->
+
+		<!-- 
+          <div class="form-group col-md-3">
+            <label>CNPJ</label>
+            <input type="text" class="form-control" id="cnpj" name="cnpj" th:value="${pessoa.cnpj}">
+          </div>  -->
+
+        </div>  
+
+        <div class="form-row">
+         
+
+          <div class="form-group col-md-2">
+            <label>Número</label>
+            <input type="text" class="form-control" id="numero" name="numero" th:value="${pessoa.numero}">
+          </div>
+
+          <div class="form-group col-md-4">
+            <label>Complemento</label>
+            <input type="text" class="form-control" id="complemento" name="complemento" th:value="${pessoa.complemento}">
+          </div>
+		</div>
+		
+		<div class="form-row">
+			<div class="form-group col-md-3">
+            	<label>CEP</label>
+            	<input type="text" class="form-control" id="cep" name="cep" th:value="${pessoa.cep}">
+			</div>
+
+			<div class="form-group col-md-6">
+            	<label>Cidade</label>
+            	<input type="text" class="form-control" id="municipio" name="municipio" th:value="${pessoa.municipio}">
+			</div>
+
+			<div class="form-group col-md-3">
+            	<label>Estado</label>
+            	<select th:field="${pessoa.uf}" class="form-control">
+					<option th:value="'PR'" th:text="PR">PR</option>
+					<option th:value="'SP'" th:text="SP">SP</option>
+					<option th:value="'SC'" th:text="SC">SC</option>
+					<option th:value="'RS'" th:text="RS">RS</option>
+            	</select>
+          	</div>
+		</div>
+		<div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Telefone</label>
+            <input type="text" class="form-control" id="telefone" name="telefone" th:value="${pessoa.telefone}">
+          </div>
+
+          <div class="form-group col-md-4">
+            <label>Celular</label>
+            <input type="text" class="form-control" id="celular" name="celular" th:value="${pessoa.celular}">
+          </div>
+
+          <div class="form-group col-md-4">
+            <label>Convênio</label>
+            <input type="text" class="form-control" id="convenio" name="convenio" th:value="${pessoa.convenio}">
+          </div>
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+      </form>
+    </div>
+    </div>
+    </div>
+   
+
+</html>

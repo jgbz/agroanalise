@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="~{header :: head}">
+		<meta charset="utf-8">
+	</head>
+	
+	<body>
+		<nav th:insert="~{navbar :: nav}"></nav>
+		<div class="container-fluid">
+		<br/>
+			
+		</div>
+			<br/>			
+			<div class="card container" style="height: 40%">
+			<form action="./salvar" method="post">
+			
+				<div class="alert alert-danger"
+					th:if="${not #strings.isEmpty(erros)}" style="margin-top: 10px">
+					<div th:each="erro : ${erros}">
+						<span th:text="${erro.getDefaultMessage()}"></span>
+					</div>				
+				</div>
+				
+				<div class="form-wrapper">
+					<div class="form-row">				
+						<div class="form-group col-md-8">
+							<label>Nome</label>						
+							<input type="text" class="form-control" id="nome" name="nome" th:value="${convenio.nome}"/>
+						</div>
+						<div class="form-group col-md-4">
+							<label>Cnpj</label>	
+							<input type="text" class="form-control" id="cnpj" name="cnpj" th:value="${convenio.cnpj}"/>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-8">
+							<label>Email</label>	
+							<input type="email" class="form-control" id="email" name="email" th:value="${convenio.email}"/>
+						</div>
+						<div class="form-group col-md-4">
+							<label>Telefone</label>	
+							<input type="text" class="form-control" id="telefone" name="telefone" th:value="${convenio.telefone}"/>
+						</div>				
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-8">
+							<label>Responsável Técnico</label>	
+							<input type="text" class="form-control" id="responsavelTecnico" name="responsavelTecnico" th:value="${convenio.responsavelTecnico}"/>
+						</div>
+						<div class="form-group col-md-2">
+							<label>Desconto</label>	
+							<input type="number" class="form-control" id="percentualDesconto" name="percentualDesconto" th:value="${convenio.percentualDesconto}"/>
+						</div>
+						<div class="form-group col-md-2">
+							<label>Ativo</label>	
+							<select class="form-control" th:value="${convenio.isAtivo}">
+							    <option th:value="1" >Ativo</option>
+							    <option th:value="0" >Desativado</option>
+							</select>
+						</div>					
+					</div>			
+				</div>
+				
+					
+				<input type="hidden" id="id" name="id" th:value="${convenio.id}" th:if="${convenio != null}"/>
+				<button type="submit" class="btn btn-success" >Salvar</button>
+				<a href="http://localhost:8080/convenios" class="btn btn-danger">Cancelar</a>
+				<div style="margin-top: 10px"></div>
+			</form>
+			
+			
+			
+		</div>
+		<div th:insert="~{footer :: footer}"></div>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+	<head th:insert="~{header :: head}">
+		<meta charset="utf-8">
+		<title>AgroAnálise</title>
+	</head>
+	
+	<body>
+		<nav th:insert="~{navbar :: nav}"></nav>
+		
+		<div class="container">
+			<a href="convenios/formulario" class="btn btn-success" id="newButton">Novo Convênio</a>
+		</div>
+		<div id="table-wrapper">
+  			<div class="container tableFixHead">
+  			<div class="alert alert-danger" th:text="${message}" th:if="${message != null}"></div>
+			<table class="table table-light table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th style="width: 3%" >Código</th>
+						<th style="width: 10%">Nome</th>
+						<th style="width: 10%">Telefone</th>
+						<th style="width: 10%">Responsável</th>
+						<th style="width: 5%">Desconto</th>
+						<th style="width: 5%">...</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c : ${convenios}">
+						<td th:text="${c.id}">Código</td>
+						<td th:text="${c.nome}">Nome</td>
+						<td th:text="${c.telefone}">Telefone</td>
+						<td th:text="${c.responsavelTecnico}">Nome</td>
+						<td th:text="${c.percentualDesconto}">Desconto</td>
+						<td><a th:href="@{convenios/editar/(id=${c.id})}" class="btn btn-secondary" title="Editar">
+								<i class="far fa-edit"></i>
+							</a>
+							<a th:href="@{convenios/excluir/(id=${c.id})}" class="btn btn-danger" title="Excluir">
+								<i class="far fa-trash-alt"></i>
+							</a>
+						</td>
+					<tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		
+			
+	
+		<div th:insert="~{footer :: footer}">
+		</div>
+	</body>
+</html>

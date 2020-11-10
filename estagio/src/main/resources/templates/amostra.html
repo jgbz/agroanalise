@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+	<head th:insert="~{header :: head}">
+		<meta charset="utf-8">
+		<title>AgroAnálise</title>
+	</head>
+	
+	<body>
+		<nav th:insert="~{navbar :: nav}"></nav>
+		<div class="container">
+			<a href="amostras/formulario" class="btn btn-success" id="newButton">Nova Amostra</a>
+		</div>
+		<div id="table-wrapper">
+		<div class="container tableFixHead">
+			<table class="table table-light table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th style="width: 5%" >Código</th>
+						<th>Terreno</th>
+						<th style="width: 20%">Data de Recebimento</th>
+						<th>Status</th>
+						<th style="width: 20%">...</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="a : ${amostras}">
+						<td th:text="${a.id}"></td>
+						<td th:text="${a.terreno.getLocal()}"></td>
+						<td th:text="${#temporals.format(a.dataRecebimento, 'dd/MM/yyyy')}"></td>
+						<td th:text="${a.status}"></td>
+						<td>
+							<a th:href="@{amostras/np/(id=${a.id})}" class="btn btn-success" title="Adicionar Nematoide">
+								<i class="far fa-plus-square"></i>
+							</a>
+							<a th:href="@{amostras/editar/(id=${a.id})}" class="btn btn-warning" title="Editar">
+								<i class="far fa-edit"></i>
+							</a>
+							<a th:data-url="@{/amostras/excluir/(id=${a.id})}"  th:onclick="if (window.confirm('Tem certeza que quer excluir a amostra?')) { 
+				window.location.href = this.getAttribute('data-url')
+				}" class="btn btn-danger" title="Excluir">
+								<i class="far fa-trash-alt"></i>
+							</a>
+							<a th:data-url="@{amostras/laudo/(id=${a.id})}"  th:onclick="if (window.confirm('Tem certeza que quer gerar o laudo da amostra? A operação não pode ser desfeita.')) { 
+				window.location.href = this.getAttribute('data-url')
+				}" class="btn btn-info" title="Gerar Laudo">
+								<i class="far fa-file-alt"></i>
+							</a>
+						</td>
+					<tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+		<div th:insert="~{footer :: footer}">
+		</div>
+		<script>
+		function areYouSure(){ 
+			if (window.confirm("Do you really want to leave?")) { 
+				window.location.href = this.getAttribute('data-url')
+				}
+		}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+	<head th:insert="~{header :: head}">
+		<meta charset="utf-8">
+		<title>AgroAnálise</title>
+	</head>
+	
+	<body>
+		<nav th:insert="~{navbar :: nav}"></nav>
+		<div class="container">
+			<a href="terrenos/formulario" class="btn btn-success" id="newButton">Novo Terreno</a>
+		</div>
+		<div id="table-wrapper">
+  			<div class="container tableFixHead">
+  			<div class="alert alert-danger" th:text="${message}" th:if="${message != null}"></div>
+			<table class="table table-light table-bordered table-hover ">
+				<thead class="thead-dark">
+					<tr>
+						<th style="width: 5%" >Id</th>
+						<th>Local</th>						
+						<th style="width: 15%">Municipio</th>
+						<th>Proprietario</th>
+						<th style="width: 15%">...</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="t : ${terrenos}">
+						<td th:text="${t.id}">Código</td>
+						<td th:text="${t.local}">Local</td>
+						<td th:text="${t.municipio}">Municipio</td>						
+						<td th:text="${t.proprietario.getNome()}">Proprietario</td>
+						<td><a th:href="@{terrenos/editar/(id=${t.id})}" class="btn btn-secondary" title="Editar">
+								<i class="far fa-edit"></i>
+							</a>
+							<a th:href="@{terrenos/excluir/(id=${t.id})}" class="btn btn-danger" title="Excluir">
+								<i class="far fa-trash-alt"></i>
+							</a>
+						</td>
+					<tr>
+				</tbody>
+			</table>
+		</div>
+		</div>	<div th:insert="~{footer :: footer}">
+		</div>
+	</body>
+</html>

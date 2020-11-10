@@ -1,0 +1,1 @@
+insert into convenio(ID,CNPJ,EMAIL,IS_ATIVO,NOME,PERCENTUAL_DESCONTO,RESPONSAVEL_TECNICO,TELEFONE) values (1,00667476000180,'joaobzauzatroll@gmail.com',FALSE,'lavinort',5.00,'João','494949494');

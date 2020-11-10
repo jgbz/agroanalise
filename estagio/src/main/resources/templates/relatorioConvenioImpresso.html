@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:insert="~{header :: head}">
+    <meta charset="utf-8">
+    <title>ListaCliente</title>
+</head>
+<body>
+    
+    <nav th:insert="~{navbar :: nav}"></nav>
+       
+    <div class="container tableFixHead">
+    	<form>    	
+    		<a href="#" class="btn btn-success" style="background-color: #343a40; border-color: #343a40" onclick="javascript:window.print()" >Imprimir</a>    		
+			<button type="button" class="btn btn-success" style="background-color: #343a40; border-color: #343a40" onclick="javascript:window.close()">Fechar Relatório</button>			
+		</form>
+    	<br> 
+		<H2>Relatório de Convênios</H2>
+        <table class="table table-light table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width: 22%">Nome</th>
+                    <th style="width: 22%">CNPJ</th>
+                    <th style="width: 22%">E-mail</th>
+                    <th style="width: 10%">% Desconto</th>
+                    <th style="width: 12%">Telefone</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="c : ${convenios}">
+                    <td th:text="${c.nome}">Nome</td>
+                    <td th:text="${c.cnpj}">CNPJ</td>
+                    <td th:text="${c.email}">E-mail</td>
+                    <td th:text="${c.percentualDesconto}">% Desconto</td>
+                    <td th:text="${c.telefone}">Telefone</td>
+                <tr>
+            </tbody>
+        </table>
+        
+        
+    	
+		
+    </div>

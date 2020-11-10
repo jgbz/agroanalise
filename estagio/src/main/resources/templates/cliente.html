@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:insert="~{header :: head}">
+    <meta charset="utf-8">
+    <title>ListaCliente</title>
+</head>
+
+<body>
+    <nav th:insert="~{navbar :: nav}"></nav>
+    <div class="container">
+        <a href="clientes/formulario" class="btn btn-success" id="newButton">Novo Cliente</a>
+    </div>
+    <div class="container tableFixHead">
+		<div class="alert alert-danger" th:text="${message}" th:if="${message != null}"></div>
+        <table class="table table-light table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width: 5%">Código</th>
+                    <th>Nome</th>
+                    <th style="width: 15%">Telefone</th>
+                    <th style="width: 15%">Celular</th>
+                    <th>E-mail</th>
+                    <th style="width: 15%">...</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="c : ${clientes}">
+                    <td th:text="${c.id}">Código</td>
+                    <td th:text="${c.nome}">Nome</td>
+                    <td th:text="${c.telefone}">Telefone</td>
+                    <td th:text="${c.celular}">Celular</td>
+                    <td th:text="${c.email}">E-mail</td>
+                    <td><a th:href="@{clientes/editar/(id=${c.id})}" class="btn btn-secondary" title="Editar">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a th:href="@{clientes/excluir/(id=${c.id})}" class="btn btn-danger" title="Excluir">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
+                <tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:insert="~{footer :: footer}"></div>
+    </body>
+    </html>

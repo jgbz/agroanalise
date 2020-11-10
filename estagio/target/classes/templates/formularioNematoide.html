@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="pt-br">
+<head th:insert="~{header :: head}">
+ 	<meta charset="UTF-8">
+ 	<title>Formulário Terreno</title>
+</head>
+
+<body class="indexBody">
+
+ 	<nav th:insert="~{navbar :: nav}"></nav> 
+	    <div class="container" id="cliente"><br><br>
+			<div class="card container" style="height: 60%">
+				<form action="salvar" method="post" id="clienteForm">
+				
+					<div class="form-row">	
+						<div class="form-group col-md-8">
+				            <label>Gênero</label>
+				            <input type="text" class="form-control" id="genero" name="genero" th:field="${nematoide.genero}">
+						</div>
+						<div class="form-group col-md-8">
+				            <label>Espécie</label>
+				            <input type="text" class="form-control" id="especie" name="especie" th:field="${nematoide.especie}">
+						</div> 
+					</div>
+					
+			         <input type="hidden" id="id" name="id" th:value="${nematoide.id}" th:if="${nematoide != null}"/>
+			
+			        <button type="submit" class="btn btn-primary">Salvar</button>
+			        <a href="/nematoides" class="btn btn-danger">Cancelar</a>
+				</form>
+	    	</div>
+	    </div>
+
+ 	<div th:insert="~{footer :: footer}"></div>
+
+</html>

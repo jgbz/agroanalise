@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/style.css">
+  <title>Laudo</title>
+</head>
+
+<body onload="window.print();">
+  <div class="wrapper container-fluid">
+    <div class="wrap">
+      <h4>Informações da amostra</h4>
+    </div>
+
+    <div class="wrap container-fluid">
+      <div class="row">
+        <div class="col-sm" id="position-zero">
+          <a th:text="${'NR AMOSTRA: ' + laudo.getAmostra().getId()}"></a>
+        </div>
+        <div class="col-sm" id="position-one">
+          <a th:text="${'Data de Recebimento: ' + #temporals.format(laudo.getAmostra().getDataRecebimento(), 'dd/MM/yyyy')}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5" id="position-zero">
+          <a th:text="${'Material Recebido do Solo: ' + laudo.getAmostra().getPesoAmostra() + 'g.'}"></a>
+        </div>
+        <div class="col-sm-2">
+          <a th:text="${'Raiz: ' + laudo.getAmostra().getPesoRaiz() + 'g.'}"></a>
+        </div>
+        <div class="col-sm" id="position-one">
+          <a th:text="${'Data de Saida: ' + #temporals.format(laudo.getAmostra().getDataTermino(), 'dd/MM/yyyy')}">Data de Saida: 17/07/2020</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap container-fluid">
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Convenio: </a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${laudo.getAmostra().getTerreno().getProprietario().getConvenio().getId() + '-' + #strings.toUpperCase(laudo.getAmostra().getTerreno().getProprietario().getConvenio().getNome())}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Proprietário: </a>
+        </div>
+        <div class="col-sm-2" id="position-one">
+          <a>Fone:</a>
+        </div>
+        <div class="col-sm-2" id="position-two">
+          <a th:text="${laudo.getAmostra().getTerreno().getProprietario().getTelefone()}"></a>
+        </div>
+        <div class="col-sm-4" id="position-one-eight">
+          <a th:text="${laudo.getAmostra().getTerreno().getProprietario().getId() + '-' + #strings.toUpperCase(laudo.getAmostra().getTerreno().getProprietario().getNome())}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Propriedade: </a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${laudo.getAmostra().getTerreno().getId() + '-' + #strings.toUpperCase(laudo.getAmostra().getTerreno().getLocal())}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Local/Talhão: </a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${#strings.toUpperCase(laudo.getAmostra().getTerreno().getTalhao())}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Lote: </a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${#strings.toUpperCase(laudo.getAmostra().getTerreno().getLote())}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Matricula: </a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${#strings.toUpperCase(laudo.getAmostra().getTerreno().getMatricula())}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Area: </a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${#strings.toUpperCase(laudo.getAmostra().getTerreno().getArea()) + ' m²'}" th:if="${laudo.getAmostra().getTerreno().getArea() != null}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Gleba: </a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${#strings.toUpperCase(laudo.getAmostra().getTerreno().getGleba())}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Municipio: </a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${#strings.toUpperCase(laudo.getAmostra().getTerreno().getMunicipio())}"></a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap container-fluid">
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Data da Coleta:</a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${#temporals.format(laudo.getAmostra().getDataColeta(), 'dd/MM/yyyy')}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Cultura:</a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${laudo.getAmostra().getCultura()}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Cultivar/Híbrido:</a>
+        </div>
+        <div class="col-sm-10" id="position-one-eight">
+          <a th:text="${laudo.getAmostra().getHibrido()}"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2" id="position-zero">
+          <a>Observação:</a>
+        </div>
+        <div class="col-sm-10" id="observation">
+          <a th:text="${laudo.getAmostra().getObservacao()}"></a>
+        </div>
+      </div><br><br>
+    </div>
+    <br>
+    <div class="nematoides">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 30%;">Nematoide</th>
+            <th scope="col" style="text-align: right;">Quantidade no solo (100cm³)</th>
+            <th scope="col" style="text-align: right;">Quantidade na Raiz (1g)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="n : ${nematoides}">
+            <td th:text="${n.nematoide.getEspecie()}"></th>
+            <td th:text="${n.qtdeSolo}" style="text-align: right;">0</td>
+            <td th:text="${n.qtdeRaiz}" style="text-align: right;">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="wrap container-fluid">
+      <h5>Observações</h5>
+    </div>
+    <div class="imagem" style="margin-top: 3px;">
+      <img src="../../img/param.png" width="1110px">
+    </div>
+    <div>
+      <span>*Adaptado de Stephen Koenning (Universidade da Carolina do Norte USA, 2007). **Adaptado Asmus; Andrade,
+        1999; Garcia et al., 1999; Inomoto et al., 2010.</span>
+      <span>Observação: vale ressaltar que a presença de Heterodera glycines, Pratylenchus brachyurus, Meloidogyne spp.
+        já é um indicativo da necessidade de manejo, independente da população. Desta forma, na
+        constatação de nematoides, aconselha-se a consultar um Eng. Agrônomo, para tomada de decisão para o planejamento
+        do manejo integrado.
+      </span><br><br>
+      <span>O resultado obtido restringe-se a amostra recebida pelo laboratório. O solicitante é responsável pela coleta
+        e qualidade da amostra até o recebimento pelo laboratório.</span>
+    </div><br>
+    <div class="wrap container-fluid">
+      <h5>Metodologias utilizadas nas extrações e análises
+      </h5>
+    </div>
+    <div>
+      <span>Extração de nematoides do solo: JENKINS, W.R. A rapid centrifugal-flotation technique for separating
+        nematodes from soil. Plant Disease Report 48: 692, 1964. COOLEN, W.A.; DHERDE, C.J. A method for
+        the quantitative extraction of nematodes from plant tissue. State Agricultural Research Centre - GHENT, Belgium.
+        77p. 1972. Análise de espécies de Meloidogyne: CARNEIRO, R.M.D.G.; ALMEIDA, M.R.A.
+        Técnica de eletroforese usada no estudo de enzimas dos nematoides das galhas para identificação de espécies.
+        Nematologia Brasileira 25: 35-44, 2001. TAYLOR, A.L.; SASSER, J.N. Biology, identification
+        and control of root-knot nematodes (Meloidogyne spp.). FURLANETTO, C.; DAVI, J.J.S.; GRABOWSKI, M.S.;
+        DIAS-ARIEIRA, C.R.;LAYTER, N.A.; SEIFERT, K.E. Reação de adubos verdes de verão ao
+        nematoide _Tubixaba tuxaua_. TROPICAL PLANT PATHOLOGY, v.33, n.6, p.403-408, 2008.</span>
+    </div>
+    <div class="assinatura">
+      <span>----------------------------------
+      </span><br>
+      <span>ANDRE LUIZ DE OLIVEIRA GONÇALVES</span><br>
+      <span>Responsável Técnico</span><br>
+      <span>CREA-PR 114268/D</span>
+    </div>
+  </div>
+
+</body>
+
+</html>
